@@ -14,14 +14,25 @@ class SortingRobot:
         Returns True if the robot can move right or False if it's
         at the end of the list.
         """
-        return self._position < len(self._list) - 1
+
+        # we want to know if the we are at the end of the lsit or not 
+        # to do that we'll check if there is a value to the right by 
+        # trying to move our position to the right if we can then return true if 
+        for self._position in self._list:
+            if self._position < len(self._list) - 1:
+                self._position += 1
+                return True
+            else:
+                return False    
 
     def can_move_left(self):
         """
         Returns True if the robot can move left or False if it's
         at the start of the list.
         """
-        return self._position > 0
+        if self._position  == 0:
+
+            return True
 
     def move_right(self):
         """
