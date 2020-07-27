@@ -15,24 +15,16 @@ class SortingRobot:
         at the end of the list.
         """
 
-        # we want to know if the we are at the end of the lsit or not 
-        # to do that we'll check if there is a value to the right by 
-        # trying to move our position to the right if we can then return true if 
-        for self._position in self._list:
-            if self._position < len(self._list) - 1:
-                self._position += 1
-                return True
-            else:
-                return False    
+        return self._position < len(self._list) - 1
 
     def can_move_left(self):
         """
         Returns True if the robot can move left or False if it's
         at the start of the list.
         """
-        if self._position  == 0:
+        
 
-            return True
+        return  self._position  > 0
 
     def move_right(self):
         """
@@ -62,6 +54,8 @@ class SortingRobot:
 
     def swap_item(self):
         """
+        /pickup
+
         The robot swaps its currently held item with the list item in front
         of it.
         This will increment the time counter by 1.
@@ -107,8 +101,25 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-        # Fill this out
-        pass
+
+        if not self.can_move_right():
+            return
+
+        while self.can_move_right():                                    # if the robot can move right
+            if self.compare_item() == -1 or self.compare_item() == None:  # pick up the first item and start comparing items 
+                self.swap_item()                                        # item is less than current item 
+            self.move_right()                                             # lastly move forward 
+        
+        while self.can_move_left() and self.compare_item() != None:     
+            if self.compare_item() == 1:
+                self.swap_item()
+            self.move_left()
+
+        # now we can leave the smallest item at the front of the list 
+        self.swap_item()
+        # now we move to the next item and start again 
+        self.move_right()
+        self.sort()
 
 
 if __name__ == "__main__":
