@@ -105,13 +105,13 @@ class SortingRobot:
         if not self.can_move_right():
             return
 
-        while self.can_move_right():                                    # if the robot can move right
+        while self.can_move_right():                                      # if the robot can move right
             if self.compare_item() == -1 or self.compare_item() == None:  # pick up the first item and start comparing items 
-                self.swap_item()                                        # item is less than current item 
+                self.swap_item()                                          # item is less than current item 
             self.move_right()                                             # lastly move forward 
         
-        while self.can_move_left() and self.compare_item() != None:     
-            if self.compare_item() == 1:
+        while self.can_move_left() and self.compare_item() != None:     # move back down the list to and compare 
+            if self.compare_item() == 1:                                # looking for the smallest valiue 
                 self.swap_item()
             self.move_left()
 
